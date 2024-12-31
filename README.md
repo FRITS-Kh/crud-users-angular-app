@@ -1,4 +1,6 @@
-# EasymorphUsersApp
+# UsersApp
+
+Provides CRUD operations with a mocked HTTP interceptor.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
 
