@@ -1,0 +1,21 @@
+<div class="card card--fixed">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-transparent">
+      <button type="button" class="btn btn-primary" (click)="open()">
+        Add user
+      </button>
+    </li>
+    @for (user of users$ | async; track user.id) {
+    <li class="list-group-item bg-transparent">
+      <app-user-list-item
+        [user]="user"
+        (remove)="removeUser($event)"
+      ></app-user-list-item>
+    </li>
+    } @empty {
+    <li class="list-group-item bg-transparent text-center fs-4">
+      No users yet
+    </li>
+    }
+  </ul>
+</div>

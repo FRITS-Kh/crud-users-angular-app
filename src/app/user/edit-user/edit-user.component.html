@@ -1,0 +1,54 @@
+<form
+  class="card card--fixed"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  autocomplete="off"
+>
+  <div class="card-header">
+    <a class="btn btn-outline-secondary" routerLink="/">Back to list</a>
+    <button class="btn btn-primary ms-2" [disabled]="this.form.invalid">
+      Save changes
+    </button>
+  </div>
+
+  <div class="card-body">
+    <app-form-control
+      fieldId="name"
+      label="Name"
+      [control]="form.controls['name']"
+      [patternError]="regexErrors.latinAndNumbersAndSpaces"
+    >
+      <input
+        id="name"
+        class="form-control"
+        name="name"
+        formControlName="name"
+        [maxLength]="userNameMaxLength"
+        required
+        #field
+      />
+    </app-form-control>
+
+    <app-form-control
+      fieldId="email"
+      label="Primary email"
+      class="mt-3"
+      [control]="form.controls['email']"
+    >
+      <input
+        id="email"
+        class="form-control"
+        name="email"
+        type="email"
+        formControlName="email"
+        required
+        #field
+      />
+    </app-form-control>
+
+    <div class="mt-3">
+      <app-label>Additional emails</app-label>
+      <app-additional-emails [form]="form"></app-additional-emails>
+    </div>
+  </div>
+</form>

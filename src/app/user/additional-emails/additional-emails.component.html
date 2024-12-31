@@ -1,0 +1,29 @@
+<div [formGroup]="form">
+  <div formArrayName="additionalEmails">
+    <app-form-control
+      class="d-flex align-items-center flex-wrap gap-1 mb-2"
+      *ngFor="let emailControl of additionalEmailsArray.controls; let i = index"
+      [control]="emailControl"
+    >
+      <input
+        class="form-control w-auto flex-grow-1"
+        name="additional-email-{{ i }}"
+        type="email"
+        [formControlName]="i"
+        required
+        #field
+      />
+
+      <button
+        type="button"
+        class="btn-close"
+        title="Remove field"
+        (click)="removeEmail(i)"
+      ></button>
+    </app-form-control>
+
+    <button class="btn btn-outline-primary" type="button" (click)="addEmail()">
+      Add Email
+    </button>
+  </div>
+</div>

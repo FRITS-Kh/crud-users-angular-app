@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@use "bootstrap/scss/bootstrap" as * with (
+  $body-bg: #e9ecef,
+  $primary: #337ab7
+);
+
+$container-bg: #fcfcfc;
+
+.card,
+.modal-content {
+  background: $container-bg;
+}
+
+.card--fixed {
+  max-width: 800px;
+  margin: 0 auto;
+}

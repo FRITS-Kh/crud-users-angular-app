@@ -1,0 +1,18 @@
+<app-label [fieldId]="fieldId" *ngIf="label">{{ label }}</app-label>
+
+<ng-content select="[field]"></ng-content>
+<ng-content></ng-content>
+
+<div class="invalid-feedback" *ngIf="control && errorKey" [ngSwitch]="errorKey">
+  <span *ngSwitchCase="'required'">This field is required</span>
+  <span *ngSwitchCase="'maxlength'">
+    No more than
+    {{ control.errors ? control.errors[errorKey].requiredLength : 0 }}
+    characters are allowed
+  </span>
+  <span *ngSwitchCase="'email'">Email is incorrect</span>
+  <span *ngSwitchCase="'pattern'">
+    <span *ngIf="patternError">{{ patternError }}</span>
+    <span *ngIf="!patternError">Pattern does not match</span>
+  </span>
+</div>

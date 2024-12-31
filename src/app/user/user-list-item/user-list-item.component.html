@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between gap-3">
+  <span class="flex-grow-1 w-50 text-break">
+    <a class="link-primary" routerLink="user/{{ user.id }}/edit">
+      {{ user.name }}
+    </a>
+  </span>
+  <span class="flex-grow-1 w-50 text-break">{{ user.email }}</span>
+  <button
+    type="button"
+    class="flex-shrink-0 btn-close"
+    title="Remove user"
+    (click)="onRemove(user.id)"
+  ></button>
+</div>
+
+<app-spinner *ngIf="loading$ | async"></app-spinner>
