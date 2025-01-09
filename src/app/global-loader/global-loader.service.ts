@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EventType, Router } from '@angular/router';
 import {
   defer,
@@ -16,11 +17,16 @@ import {
 export class GlobalLoaderService {
   loading$;
   private setLoading$ = new Subject<boolean>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(private router: Router) {
     this.loading$ = merge(this.getRouterLoading(), this.setLoading$).pipe(
-      shareReplay(1)
+      shareReplay({
+        bufferSize: 1,
+        refCount: true,
+      })
     );
+    this.loading$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 
   show() {

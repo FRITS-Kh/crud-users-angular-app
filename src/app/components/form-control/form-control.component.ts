@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   DestroyRef,
@@ -18,6 +20,7 @@ import { LabelComponent } from '../label/label.component';
   imports: [CommonModule, LabelComponent],
   templateUrl: './form-control.component.html',
   styleUrl: './form-control.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormControlComponent implements AfterContentInit {
   @Input() fieldId?: string;
@@ -30,6 +33,8 @@ export class FormControlComponent implements AfterContentInit {
   private validClassName = 'is-valid';
   private invalidClassName = 'is-invalid';
   private destroyRef = inject(DestroyRef);
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterContentInit(): void {
     if (this.field && this.control) {
@@ -63,5 +68,7 @@ export class FormControlComponent implements AfterContentInit {
     } else {
       fieldEl.classList.remove(this.validClassName);
     }
+
+    this.cdr.markForCheck();
   }
 }

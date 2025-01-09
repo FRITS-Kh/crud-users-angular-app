@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormArray,
@@ -14,7 +20,7 @@ import { LabelComponent } from '../../components/label/label.component';
 import { GlobalLoaderService } from '../../global-loader/global-loader.service';
 import { regexErrors } from '../../utils/regex';
 import { AdditionalEmailsComponent } from '../additional-emails/additional-emails.component';
-import { userFormValidators } from '../user-form-config';
+import { userFormValidators, userNameMaxLength } from '../user-form-config';
 import { User } from '../user.interfaces';
 import { UsersService } from '../users.service';
 
@@ -30,10 +36,11 @@ import { UsersService } from '../users.service';
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditUserComponent implements OnInit {
   form: FormGroup;
-  userNameMaxLength = 100;
+  userNameMaxLength = userNameMaxLength;
   regexErrors = regexErrors;
   private userId: number;
   private destroyRef = inject(DestroyRef);
